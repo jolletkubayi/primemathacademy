@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { NavLink } from "@/components/NavLink";
 import { BookOpen, Brain, Target, Shield, Zap, CheckCircle2 } from "lucide-react";
 import heroImage from "@/assets/hero-math.jpg";
+import TeamSection from "@/components/TeamSection";
 
 const Landing = () => {
   return (
@@ -199,6 +200,9 @@ const Landing = () => {
           </div>
         </div>
       </section>
+
+      {/* Team Section */}
+      <TeamSection />
 
       {/* CTA Section */}
       <section className="py-20 px-6">
