@@ -7,12 +7,14 @@ import { Card } from "@/components/ui/card";
 import { Brain, LogOut, MessageSquare, BookOpen, TrendingUp, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { NavLink } from "@/components/NavLink";
+import AdminPanel from "@/components/AdminPanel";
 
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [subscription, setSubscription] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -55,7 +57,7 @@ const Dashboard = () => {
         .from("subscriptions")
         .select("*")
         .eq("user_id", userId)
-        .single();
+        .maybeSingle();
       
       setSubscription(subData);
 
@@ -64,9 +66,19 @@ const Dashboard = () => {
         .from("profiles")
         .select("*")
         .eq("user_id", userId)
-        .single();
+        .maybeSingle();
       
       setProfile(profileData);
+
+      // Check if user is admin
+      const { data: roleData } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId)
+        .eq("role", "admin")
+        .maybeSingle();
+      
+      setIsAdmin(!!roleData);
     } catch (error) {
       console.error("Error fetching user data:", error);
     } finally {
@@ -171,7 +183,7 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
           <Card className="p-6">
             <div className="text-3xl font-bold text-primary mb-2">0</div>
             <p className="text-muted-foreground">Problems Solved</p>
@@ -191,6 +203,13 @@ const Dashboard = () => {
             <p className="text-muted-foreground">Current Grade</p>
           </Card>
         </div>
+
+        {/* Admin Panel */}
+        {isAdmin && (
+          <div className="mt-12 pt-12 border-t border-border">
+            <AdminPanel />
+          </div>
+        )}
       </main>
     </div>
   );
