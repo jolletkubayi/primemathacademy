@@ -154,53 +154,61 @@ const Dashboard = () => {
         )}
 
         {/* Main Actions */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <NavLink to="/tutor">
-            <Card className="p-6 hover:shadow-elevated transition-all cursor-pointer group">
-              <MessageSquare className="h-12 w-12 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-semibold mb-2">AI Tutor Chat</h3>
-              <p className="text-muted-foreground">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+          <NavLink to="/tutor" className="block">
+            <Card className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full">
+              <MessageSquare className="h-10 w-10 sm:h-12 sm:w-12 text-primary mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">AI Tutor Chat</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Ask questions, upload problems, and get instant solutions
               </p>
             </Card>
           </NavLink>
 
-          <Card className="p-6 hover:shadow-elevated transition-all cursor-pointer group opacity-75">
-            <BookOpen className="h-12 w-12 text-secondary mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-semibold mb-2">Notes & Lessons</h3>
-            <p className="text-muted-foreground">
+          <Card 
+            className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full"
+            onClick={() => toast({ title: "Coming Soon", description: "Notes & Lessons feature is under development." })}
+          >
+            <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">Notes & Lessons</h3>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Access curriculum-aligned notes and learning materials
             </p>
+            <span className="inline-block mt-2 text-xs bg-secondary/20 text-secondary px-2 py-1 rounded">Coming Soon</span>
           </Card>
 
-          <Card className="p-6 hover:shadow-elevated transition-all cursor-pointer group opacity-75">
-            <TrendingUp className="h-12 w-12 text-accent mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-semibold mb-2">Progress Tracker</h3>
-            <p className="text-muted-foreground">
+          <Card 
+            className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full sm:col-span-2 lg:col-span-1"
+            onClick={() => toast({ title: "Coming Soon", description: "Progress Tracker feature is under development." })}
+          >
+            <TrendingUp className="h-10 w-10 sm:h-12 sm:w-12 text-accent mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">Progress Tracker</h3>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Monitor your learning journey and achievements
             </p>
+            <span className="inline-block mt-2 text-xs bg-accent/20 text-accent px-2 py-1 rounded">Coming Soon</span>
           </Card>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
-          <Card className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2">0</div>
-            <p className="text-muted-foreground">Problems Solved</p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
+          <Card className="p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">0</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Problems Solved</p>
           </Card>
-          <Card className="p-6">
-            <div className="text-3xl font-bold text-secondary mb-2">0</div>
-            <p className="text-muted-foreground">Study Hours</p>
+          <Card className="p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-secondary mb-1 sm:mb-2">0</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Study Hours</p>
           </Card>
-          <Card className="p-6">
-            <div className="text-3xl font-bold text-accent mb-2">0</div>
-            <p className="text-muted-foreground">Topics Mastered</p>
+          <Card className="p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-accent mb-1 sm:mb-2">0</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Topics Mastered</p>
           </Card>
-          <Card className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2">
+          <Card className="p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">
               {profile?.grade || "-"}
             </div>
-            <p className="text-muted-foreground">Current Grade</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Current Grade</p>
           </Card>
         </div>
 
