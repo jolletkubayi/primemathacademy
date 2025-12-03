@@ -165,29 +165,25 @@ const Dashboard = () => {
             </Card>
           </NavLink>
 
-          <Card 
-            className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full"
-            onClick={() => toast({ title: "Coming Soon", description: "Notes & Lessons feature is under development." })}
-          >
-            <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg sm:text-xl font-semibold mb-2">Notes & Lessons</h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Access curriculum-aligned notes and learning materials
-            </p>
-            <span className="inline-block mt-2 text-xs bg-secondary/20 text-secondary px-2 py-1 rounded">Coming Soon</span>
-          </Card>
+          <NavLink to="/notes" className="block">
+            <Card className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full">
+              <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Notes & Lessons</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Access curriculum-aligned notes and learning materials
+              </p>
+            </Card>
+          </NavLink>
 
-          <Card 
-            className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full sm:col-span-2 lg:col-span-1"
-            onClick={() => toast({ title: "Coming Soon", description: "Progress Tracker feature is under development." })}
-          >
-            <TrendingUp className="h-10 w-10 sm:h-12 sm:w-12 text-accent mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg sm:text-xl font-semibold mb-2">Progress Tracker</h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Monitor your learning journey and achievements
-            </p>
-            <span className="inline-block mt-2 text-xs bg-accent/20 text-accent px-2 py-1 rounded">Coming Soon</span>
-          </Card>
+          <NavLink to="/progress" className="block sm:col-span-2 lg:col-span-1">
+            <Card className="p-4 sm:p-6 hover:shadow-elevated transition-all cursor-pointer group h-full">
+              <TrendingUp className="h-10 w-10 sm:h-12 sm:w-12 text-accent mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Progress Tracker</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Monitor your learning journey and achievements
+              </p>
+            </Card>
+          </NavLink>
         </div>
 
         {/* Quick Stats */}
