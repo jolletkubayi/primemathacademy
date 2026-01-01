@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArrowLeft, BookOpen, Calculator, FileText, Play, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import LessonContent from "@/components/LessonContent";
 
 const capsContent = {
   "10": {
@@ -207,6 +208,11 @@ const NotesLessons = () => {
   const [selectedGrade, setSelectedGrade] = useState("10");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeLessonData, setActiveLessonData] = useState<{
+    grade: string;
+    topicId: string;
+    subtopicName: string;
+  } | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -229,7 +235,7 @@ const NotesLessons = () => {
     setLoading(false);
   };
 
-  const handleStartLesson = (topicName: string, subtopicName: string) => {
+  const handleStartLesson = (topicId: string, subtopicName: string) => {
     if (!isSubscribed) {
       toast({
         title: "Subscription Required",
@@ -238,10 +244,15 @@ const NotesLessons = () => {
       });
       return;
     }
-    toast({
-      title: "Coming Soon",
-      description: `${subtopicName} lessons will be available soon!`,
+    setActiveLessonData({
+      grade: selectedGrade,
+      topicId,
+      subtopicName,
     });
+  };
+
+  const handleCloseLesson = () => {
+    setActiveLessonData(null);
   };
 
   if (loading) {
@@ -253,6 +264,18 @@ const NotesLessons = () => {
   }
 
   const currentContent = capsContent[selectedGrade as keyof typeof capsContent];
+
+  // Show lesson content if active
+  if (activeLessonData) {
+    return (
+      <LessonContent
+        grade={activeLessonData.grade}
+        topicId={activeLessonData.topicId}
+        subtopicName={activeLessonData.subtopicName}
+        onClose={handleCloseLesson}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -327,7 +350,7 @@ const NotesLessons = () => {
                               <div className="flex flex-col sm:flex-row gap-2 pt-2">
                                 <Button
                                   size="sm"
-                                  onClick={() => handleStartLesson(topic.name, subtopic.name)}
+                                  onClick={() => handleStartLesson(topic.id, subtopic.name)}
                                   className="flex-1"
                                 >
                                   <Play className="h-4 w-4 mr-2" />
@@ -336,7 +359,7 @@ const NotesLessons = () => {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  onClick={() => handleStartLesson(topic.name, subtopic.name)}
+                                  onClick={() => handleStartLesson(topic.id, subtopic.name)}
                                   className="flex-1"
                                 >
                                   <FileText className="h-4 w-4 mr-2" />
